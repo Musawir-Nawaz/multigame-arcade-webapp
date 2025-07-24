@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Global reset and box-sizing */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Page background and default font */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e0f7ff;
+}
+
+/* Header container with flex layout */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: #87ceeb;
+  padding: 30px 20px;
+  position: relative;
+}
+
+/* Logo positioned top-left */
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+
+/* Navigation links positioned top-right */
+.nav-links {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+}
+
+/* Styling for navigation links */
+.nav-links a {
+  color: #001f4d;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Hover effect for navigation links */
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Main header content layout */
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+/* Center text block */
+.text { text-align: center; }
+
+/* Main title inside header */
+.header h2 {
+  font-size: 48px;
+  color: #001f4d;
+  margin-bottom: 10px;
+}
+
+/* Subtitle inside header */
+.header p {
+  font-size: 20px;
+  color: white;
+}
+
+/* Arcade GIF image inside header */
+.graphic img {
+  height: 130px;
+  width: 130px;
+  margin-left: 40px;
+}
+
+/* Mission section container */
+.mission {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+  align-items: center;
+  gap: 40px;
+  border-radius: 12px;
+  background-color: #b3e5fc;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+/* Text block inside mission section */
+.mission .text {
+  flex: 1;
+}
+
+/* Mission title */
+.mission .text h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #001f4d;
+}
+
+/* Mission description */
+.mission .text p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #003366;
+}
+
+/* Image container inside mission */
+.mission .graphic {
+  flex: 1;
+  text-align: center;
+}
+
+/* Mission image styling */
+.mission img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Journey timeline section */
+.journey-section {
+  background: #add8e6;
+  padding: 40px;
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
+  color: #001f4d;
+}
+
+/* Journey title */
+.journey-section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Layout for timeline and image */
+.journey-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Vertical timeline container */
+.timeline {
+  flex: 1;
+  padding-left: 50px;
+  border-left: 4px solid #001f4d;
+  position: relative;
+}
+
+/* Each timeline item spacing */
+.timeline-item {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Circular dot before each timeline item */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: #001f4d;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* Timeline item text */
+.timeline-item p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #003366;
+}
+
+/* Image container next to timeline */
+.journey-content .graphic {
+  flex: 1;
+  text-align: center;
+}
+
+/* Journey image styling */
+.journey-content img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Perks/Benefits section */
+.perks-section {
+  background: #b2ebf2;
+  padding: 50px;
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
+  text-align: center;
+}
+
+/* Perks title */
+.perks-section h2 {
+  font-size: 36px;
+  color: #001f4d;
+  margin-bottom: 35px;
+}
+
+/*  for perks badges */
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual badge styling */
+.badge {
+  background-color: #fff;
+  color: #0077b6;
+  padding: 20px 25px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 160px;
+}
+
+/* Upcoming features section */
+.next-section {
+  background-color: #81d4fa;
+  padding: 50px;
+  border-radius: 15px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+/* What's next title */
+.next-section h2 {
+  text-align: center;
+  color: #001f4d;
+  font-size: 36px;
+  margin-bottom: 35px;
+}
+
+/* Grid layout for upcoming features */
+.next-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 25px;
+}
+
+/* Upcoming feature card */
+.next-card {
+  background: #2c2c3a;
+  padding: 25px;
+  border-radius: 15px;
+  color: #c6f1ff;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Footer styling */
+.footer {
+  background-color: #87ceeb;
+  color: #001f4d;
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+/* Footer links */
+.footer a {
+  color: #003366;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Quote/statement section */
+.section {
+  background-color: #b3e5fc;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 18px;
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 1200px;
+}
+
+/* Quoted message */
+.section blockquote {
+  font-style: italic;
+  font-size: 20px;
+  color: #001f4d;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Author text */
+.section p {
+  color: #003366;
+  font-weight: bold;
+}
+
+/* Developer profiles section */
+.developer-section {
+  background: #e1f5fe;
+  margin-top: 40px;
+  padding: 30px 10px;
+  border-top: 1px solid #444;
+}
+
+/* Developer section title */
+.developer-section h2 {
+  margin-left: 40px;
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #001f4d;
+}
+
+/* Grid layout for developer cards */
+.dev-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  justify-content: center;
+}
+
+/* Individual developer card */
+.dev-card {
+  background-color: #2f2e41;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  width: 250px;
+}
+
+/* Developer profile image */
+.dev-card img {
+  width: 90px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ffd369;
+  margin-bottom: 15px;
+}
+
+/* Developer name */
+.dev-card h4 {
+  color: #ffde59;
+  margin-bottom: 8px;
+}
+
+/* Developer short bio */
+.dev-card p {
+  font-size: 15px;
+  color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<!-- Header with logo, nav, and hero section -->
+<header class="header">
+  <div class="logo">
+    <img src="logo.webp" alt="Logo" width="60px" />
+  </div>
+
+  <div class="nav-links">
+    <a href="../HomePage/Homepage.html">Home</a>
+    <a href="Aboutpage.html">About</a>
+    
+
+    <a href="../Contact/contact.html">Contact</a>
+  </div>
+
+  <div class="head">
+    <div class="graphic">
+      <img src="arcade-retro.gif" alt="Cute Pixel Arcade Gif" />
+    </div>
+    <div class="text">
+      <h2>Explore The Arcade</h2>
+      <p>Where learning meets fun🎯</p>
+    </div>
+  </div>
+</header>
+
+<!-- Mission statement section -->
+<section class="mission">
+  <div class="text">
+    <h2>Our Mission</h2>
+    <p>
+      Our mission is to create a playful digital space that sparks curiosity,
+      sharpens the mind, and provides joyful breaks in your day. Whether you're
+      here for a quick mental boost or a moment of fun, we’re all about making
+      your time enjoyable and rewarding.
+    </p>
+  </div>
+  <div class="graphic">
+    <img src="side.png" alt="Arcade Graphic" />
+  </div>
+</section>
+
+<!-- Journey timeline section -->
+<section class="journey-section">
+  <h2>🚀 Our Journey So Far</h2>
+  <div class="journey-content">
+    <div class="timeline">
+      <div class="timeline-item"><p>Launched in March 2025 by 3 passionate students.</p></div>
+      <div class="timeline-item"><p>First game "Pixel Pong" went live in Week 1!</p></div>
+      <div class="timeline-item"><p>Crossed 100 active players in the 2nd week.</p></div>
+      <div class="timeline-item"><p>400+ followers on Instagram.</p></div>
+      <div class="timeline-item"><p>Featured in campus tech fair in April 2025.</p></div>
+    </div>
+    <div class="graphic">
+      <img src="giphy.gif" alt="Arcade Graphic" />
+    </div>
+  </div>
+</section>
+
+<!-- Perks and benefits section -->
+<section class="perks-section">
+  <h2>🎁 Player Perks</h2>
+  <div class="badge-grid">
+    <div class="badge">✨ Free Mini-Games</div>
+    <div class="badge">🧠 Brain Boosting Fun</div>
+    <div class="badge">💬 Community Coming Soon</div>
+    <div class="badge">🎯 Reflex Training</div>
+    <div class="badge">🏆 Monthly Leaderboard</div>
+  </div>
+</section>
+
+<!-- Upcoming features section -->
+<section class="next-section">
+  <h2>🔮 What’s Next?</h2>
+  <div class="next-grid">
+    <div class="next-card">🧠 Multiplayer Trivia Battles</div>
+    <div class="next-card">🏆 Global Leaderboard System</div>
+    <div class="next-card">💬 In-Game Chat for Players</div>
+    <div class="next-card">📱 Android Version Launch</div>
+    <div class="next-card">🕹️ “Space Blaster” Game Release</div>
+  </div>
+</section>
+
+<!-- Developer introduction section -->
+<section class="developer-section">
+  <h2>👨‍💻 Meet the Developers</h2>
+  <div class="dev-profiles">
+    <div class="dev-card">
+      <img src="mn.jpg" alt="Dev1">
+      <h4>Musawwir Nawaz</h4>
+      <p>Front-End Developer passionate about UI/UX and JavaScript games.</p>
+    </div>
+    <div class="dev-card">
+      <img src="ai.jpg" alt="Dev2">
+      <h4>Areeba Irfan</h4>
+      <p>Creative designer and logic builder for arcade game mechanics.</p>
+    </div>
+    <div class="dev-card">
+      <img src="am.jpg" alt="Dev3">
+      <h4>Amna Ejaz</h4>
+      <p>Full-stack enthusiast and game developer lead with a love for speed!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Final statement/quote section -->
+<section class="section">
+  <blockquote>
+    “We made this arcade with love and curiosity — we hope you enjoy it as much as we loved building it!”
+  </blockquote>
+  <p>— The Arcade Team</p>
+</section>
+
+<!-- Footer with links -->
+<footer class="footer">
+  <p>&copy; 2025 PixelPlay Arcade. All rights reserved. Built with fun</p>
+  <div>
+    <a href="#">pixelplay.io</a>
+    <a href="#">arcade.fun</a>
+  </div>
+</footer>
+
+</body>
+</html>

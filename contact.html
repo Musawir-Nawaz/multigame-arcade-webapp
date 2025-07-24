@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Arcade</title>
+
+    <style>
+        /* =================== Global Body Styles =================== */
+        body {
+            background-image: url(background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* =================== Logo Section =================== */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5vh;
+            padding-left: 20px;
+        }
+
+        /* =================== Header Styles =================== */
+        .header {
+            display: flex;
+            text-align: center;
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            background-color: rgba(240, 248, 255, 0.938);
+            font-size: medium;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            color: darkgoldenrod;
+        }
+
+        /* =================== Footer Styles =================== */
+        footer {
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            background-color: rgba(240, 248, 255, 0.938);
+            text-align: center;
+            color: darkgoldenrod;
+        }
+
+        /* =================== Navigation Bar =================== */
+        .links {
+            align-content: center;
+            padding-left: 850px;
+        }
+
+        a {
+            color: darkgoldenrod;
+        }
+
+        /* =================== Contact Heading =================== */
+        .contact {
+            color: #005BBB;
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            padding-left: 120px;
+        }
+
+        /* =================== Button Styles =================== */
+        button {
+            background-color: #074b93;
+            color: white;
+            font-weight: bold;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        /* =================== Contact Form Wrapper =================== */
+        .form {
+            background-color: rgb(246, 249, 250);
+            margin-top: 20px;
+            display: flex;
+            gap: 0px;
+            width: 900px;
+            margin-left: 200px;
+            border: 1px solid #00cec9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 206, 201, 0.5);
+            margin-bottom: 50px;
+        }
+
+        /* =================== Form Styling Inside Form Section =================== */
+        .form form {
+            padding-left: 50px;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 50px;
+            font-weight: bold;
+            margin-left: -100px; /* Overridden margin to adjust layout */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(78, 76, 76, 0.585);
+            width: 500px;
+        }
+
+        .form img {
+            margin-left: 100px;
+        }
+
+        /* =================== Intro Section =================== */
+        .intro {
+            margin-bottom: 50px;
+        }
+
+        .intro h1 {
+            color: #005BBB;
+            text-align: center;
+            font-size: 60px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            padding-left: 120px;
+        }
+
+        .intro p {
+            text-align: center;
+            font-size: 20px;
+            line-height: 40px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        /* =================== Map Section =================== */
+        .map {
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-bottom: 50px;
+            background-color: aliceblue;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 0 10px rgba(78, 76, 76, 0.585);
+        }
+
+        .map p {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 20px;
+            line-height: 50px;
+            padding-left: 20px;
+        }
+
+        /* =================== General Headings =================== */
+        h1 {
+            color: #005BBB;
+            text-align: left;
+            font-size: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            padding-left: 120px;
+        }
+
+        /* =================== Footer Follow Section =================== */
+        .follow {
+            padding-top: 30px;
+            margin-left: 500px;
+            display: flex;
+        }
+
+        .pics img {
+            width: 50px;
+            height: 30px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with logo and navigation -->
+    <header class="header">
+        <div class="logo">
+            <img src="logo.webp" width="70">
+            <h2>Mini Arcade</h2>
+        </div>
+        <!-- Navigation links -->
+        <nav class="links">
+            <a href="../HomePage/Homepage.html">Home</a>|
+            <a href="../aboutpage/Aboutpage.html">About us</a>|
+            <a href="contact.html">Contact us</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Intro section with heading and message -->
+        <section class="intro">
+            <h1>We'd love to hear from you</h1>
+            <p>Every message you send sparks a new connection. Whether it’s feedback, a collaboration idea, or just a hello—your words are the first step to something wonderful. Let’s start the conversation!</p>
+        </section>
+
+        <!-- Contact form with image -->
+        <section class="form">
+            <img src="pointing_transparent.gif" alt="girl pointing">
+            <form action="">
+                <table border="0" cellpadding="5" cellspacing="0">
+                    <th colspan="32">
+                        <h1 class="contact">Share Your Thoughts</h1>
+                    </th>
+                    <tr>
+                        <td><label for="name">Name:</label></td>
+                        <td><input type="text" id="name" name="name" required size="30"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email:</label></td>
+                        <td><input type="email" id="email" name="email" required size="30"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="phone">Phone:</label></td>
+                        <td><input type="tel" id="phone" name="phone" size="30"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="subject">Subject:</label></td>
+                        <td><input type="text" id="subject" name="subject" required size="30"></td>
+                    </tr>
+                    <tr>
+                        <td valign="top"><label for="message">Message:</label></td>
+                        <td><textarea id="message" name="message" rows="5" cols="32" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button>Send Message</button></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+        <!-- Map Section with Location Info -->
+        <h1>How to Find Us</h1>
+        <section class="map">
+            <p>
+                You can find us at our physical location shown on the map. Whether you're visiting for collaboration, support, or just to say hi — you're always welcome! We're located in Lahore and easy to reach via major roads and landmarks.
+                <br>
+                <b>📍 Address</b><br>
+                Mini Arcade HQ<br>
+                123 Fun Street, Block A, Johar Town, Lahore, Pakistan<br>
+                <b>📞 Phone</b><br>
+                +92 300 1234567<br>
+                <b>📧 Email</b><br>
+                support@mini-arcade.pk
+            </p>
+
+            <!-- Embedded Google Map -->
+            <iframe
+                width="3000"
+                height="600"
+                style="border:0;"
+                loading="lazy"
+                allowfullscreen
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3630.123456789123!2d74.3412345!3d31.4187654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391904b1a2b3c4d5%3A0xabcdef1234567890!2sUniversity%20of%20Central%20Punjab!5e0!3m2!1sen!2s!4v1234567890123">
+            </iframe>
+        </section>
+    </main>
+
+    <!-- Footer with social links -->
+    <footer>
+        <div class="follow">
+            <b style="padding-top: 8px;">follow us</b>
+            <div class="pics">
+                <img src="insta.jpeg" alt="insta">
+                <img src="snapchat.jpg" alt="snapchat">
+                <img src="twiter.png" alt="twitter">
+                <img src="facebook.jpg" alt="facebook">
+            </div>
+        </div>
+        <p>&copy; 2025 MiniArcade. All rights reserved. Made with Love for gaming enthusiasts.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Whack-a-Mole</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      background-color: #ebcc89;
+      background-image: url("whackbackground.png");
+    }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 10px;
+      justify-content: center;
+      margin: 50px auto;
+    }
+    .hole {
+      width: 100px;
+      height: 100px;
+      background-color: #8B4513;
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+    .mole {
+      width: 80px;
+      height: 80px;
+      background-color: darkred;
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: none;
+    }
+    #score {
+      font-size: 24px;
+      margin-top: 20px;
+      font-weight: 800;
+      font-family:"MV Boli";
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      background-color:rgba(148, 16, 56, 0.747);
+      font-weight: bold;
+      color: aliceblue;
+      font-size: large;
+      border-radius: 20px 0px 20px 0px;
+      font-family:"MV Boli";
+    }
+    h1{
+      color:white;
+      font-family:"MV Boli";
+      background-color: #97623c;
+      display: inline;
+       padding-left: 20px;
+      padding-right:20px;
+     
+    }
+  </style>
+</head>
+<body>
+
+<h1>Whack-a-Mole 🐹</h1>
+<div id="score">Score: 0</div>
+<div id="game" onclick="mysound.play()">
+  <!-- 9 holes -->
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+  <div class="hole"><div class="mole"></div></div>
+</div>
+<button onclick="startGame()">Start Game</button>
+
+<script>
+  let mysound=new Audio("whack.mp3");
+  const holes = document.querySelectorAll('.hole');
+  const moles = document.querySelectorAll('.mole');
+  const scoreDisplay = document.getElementById('score');
+  let score = 0;
+  let currentMole = null;
+  let gameInterval = null;
+
+  function randomHole() {
+    const index = Math.floor(Math.random() * holes.length);
+    return holes[index].querySelector('.mole');
+  }
+
+  function showMole() {
+    if (currentMole) currentMole.style.display = 'none';
+    const mole = randomHole();
+    mole.style.display = 'block';
+    currentMole = mole;
+  }
+
+  function whackMole(event) {
+    if (event.target.classList.contains('mole')) {
+      score++;
+      scoreDisplay.textContent = "Score: " + score;
+      event.target.style.display = 'none';
+    }
+  }
+
+  function startGame() {
+    score = 0;
+    scoreDisplay.textContent = "Score: " + score;
+    clearInterval(gameInterval);
+    gameInterval = setInterval(showMole, 800);
+    setTimeout(() => {
+      clearInterval(gameInterval);
+      alert("Time's up! Your score: " + score);
+    }, 30000); // 30 seconds
+  }
+
+  document.getElementById('game').addEventListener('click', whackMole);
+</script>
+
+</body>
+</html>

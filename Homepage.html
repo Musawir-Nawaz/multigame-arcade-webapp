@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+       <title>Mini Arcade</title>
+
+       <style>
+       
+
+        body {
+            background-image: url("background.jpg");
+            background-repeat: repeat;
+            background-size:cover;
+            background-position: center;
+          
+            
+        }
+        /*Applying grid layout to the main div containing the games*/
+        .container{
+            box-sizing: border-box;
+            display:grid;
+            /*Giving the grid template areas automaticllay assigns them areas without explictly mentioning*/
+            grid-template-areas: 
+            "Fisrt second third"
+            "fourth fith sixth";
+            row-gap: 10vh;
+            background-color: rgba(240, 248, 255, 0.938);
+            margin: 10vh;
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            justify-content: space-evenly;
+            padding-top: 15vh;
+            padding-bottom: 15vh;
+            text-align: center;
+
+            
+        }
+        /*Styling all game labels*/
+        label{
+            display:block;
+            font-size: larger;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight:bolder;
+            background-color: #fff4acde;
+            color:darkgoldenrod;
+            border:solid burlywood;
+            border-radius: 10px;
+        }
+        h1{
+          
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight:bolder;
+            background-color: #fff4acde;
+            color:darkgoldenrod;
+            border:solid burlywood;
+             padding-left: 20px;
+             padding-right:20px;
+         
+        }
+        img{
+             border:solid burlywood;
+              border-radius: 10px;
+        }
+        /*Making a logo class to apply to the logo text and image*/
+        .logo{
+            display: flex;
+            align-items:center;
+            gap:5vh;
+        }
+         /* Applying same styles to header as the main div but reducing padding and margins*/
+        .header{
+            
+            box-sizing: border-box;
+            text-align: center;
+            margin-top: 2vh;
+            margin-left: 10vh;
+            margin-right: 10vh;
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            background-color: rgba(240, 248, 255, 0.938);
+            font-size: larger;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight:bolder;
+            padding: 3vh;
+            color:darkgoldenrod;
+        }
+         /*Applyinhg none decoration so line does not appear under links of games or nav bar*/
+        a{
+            color:darkgoldenrod;
+            text-decoration: none;
+        }
+         /*Applying exact same style to footer as that of header just leaving out the text styles*/
+        footer{
+            margin-left: 10vh;
+            margin-right: 10vh;
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            background-color: rgba(240, 248, 255, 0.938);
+            text-align: center;
+            color:darkgoldenrod;
+        }
+        .coming{
+            display: flex;
+            align-items:center;
+            flex-direction:column;
+            background-color: rgba(240, 248, 255, 0.938);
+            margin:10vh 30vh  10vh  30vh;
+            border-radius: 10px;
+            border-color: aquamarine;
+            border-style: groove;
+            padding-top: 15vh;
+            padding-bottom: 15vh;
+          
+        }
+
+       </style>
+</head>
+
+<body>
+    <header class="header">
+        <!--A SUB DIV THAT CONTAINS THE LOGO WITH FLEX LAYOUT-->
+        <div class="logo">  
+            <img src="logo.webp" width="70">
+            <h2>Mini Arcade</h2>
+           
+        </div>
+        <!-- THIS TAG PLACES A LINE-->
+        <hr>
+        <!--THE NAVIGATION BAR-->
+        <nav><a href="Homepage.html">Home</a>|<a href="../aboutpage/Aboutpage.html">About us</a>|<a href="../Contact/contact.html">Contact us</a></nav>
+    </header>
+
+    <main>
+        <!--THE MAIN DIV-->
+          <div class="container">
+<!--1-->
+         <div>
+            <img src="quiz.gif" width="200" height="200"><br>
+            <label><a href="../Quiz/Quiz.html">ThinkFast</a></label>
+         </div>
+         
+
+ <!--2-->
+         <div>
+             <img src="whack.gif"  height="200" width="200"><br>
+             <!--PLACING THE ANCHOR TAG INSIDE THE LABEL SO WHEN THE LABEL IS CLICKED IT OPENS GAME-->
+             <!--THE MAIN REASON WHY I REMOVED LINE UNDER ANCHOR TAGS,Because it was showing under the label -->
+            <label><a href="../Whack/whackAmole.html">Whack a Mole</a></label>
+         </div>
+         
+ <!--3-->
+         <div>
+             <img src="tictac.gif"  height="200" width="200"><br>
+            <label><a href="../TickTackToe/TickTackToe.html">Tic Tac Toe</a></label>
+         </div>
+
+ <!--4-->
+         <div>
+             <img src="keyboard.gif" height="200" width="200"><br>
+            <label><a href="../KeyBoard/keyboardHero.html">KeyBoard Hero</a></label>
+         </div>
+
+ <!--5-->
+         <div>
+             <img src="stone.gif" height="200" width="200"><br>
+            <label><a href="../StonePaper/StonePaper.html">Rock Paper Scissor</a></label>
+         </div>
+
+ <!--6-->
+         <div>
+             <img src="memory.gif" height="200" width="200"><br>
+            <label><a href="../Memory/Memory.html">Memory Card</a></label>
+         </div>
+    </div>
+    <div class="coming">
+        <h1>Coming soon..!</h1>
+        <video src="coming.mp4"  height="200" width="400"controls=""></video>
+    </div>
+   
+    </main>
+
+    <footer>  <p>&copy; 2025 MiniArcade. All rights reserved.Made with Love for gaming enthusiasts.</p></footer>
+  
+
+    
+</body>
+</html>

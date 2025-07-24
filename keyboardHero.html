@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyboard Hero</title>
+  <style>
+    body {
+      font-family: "MV Boli", sans-serif;
+      text-align: center;
+      background-image: url("keyboardbackground.webp");
+    }
+
+    h1 {
+      color: darkred;
+      background-color: #e2b84d;
+      display: inline;
+      padding-left: 20px;
+      padding-right:20px;
+    }
+
+    #game {
+      position: relative;
+      height: 70vh;
+      border: 3px dashed #b33e3e;
+      margin: 20px 20px auto;
+      overflow: hidden;
+      background-color: #f5e5bbc2;
+    }
+
+    .letter {
+      position: absolute;
+      font-size: 30px;
+      font-weight: bold;
+      color: #d64848;
+    }
+
+    #score {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: darkred;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎹 Keyboard Hero</h1>
+<div id="score">Score: 0</div>
+<button onclick="startGame()">Start Game</button>
+<div id="game"></div>
+
+<script>
+  let mysound=new Audio("keyboard.mp3");
+  const gameArea = document.getElementById("game");
+  const scoreDisplay = document.getElementById("score");
+  let score = 0;
+  let letters = [];
+  let fallTimer;
+  let spawnTimer;
+
+  const letterList = ["A", "S", "D", "F","W" ,"J", "K", "L","M","G","B","Q","O","P","Y"];
+  const positionList = [50, 150, 250, 350, 450, 550, 650,750];
+  let letterIndex = 0;
+  let positionIndex = 0;
+
+  function getNextLetter() {
+    const letter = letterList[letterIndex];
+    letterIndex = (letterIndex + 1) % letterList.length;
+    return letter;
+  }
+
+  function getNextPosition() {
+    const pos = positionList[positionIndex];
+    positionIndex = (positionIndex + 1) % positionList.length;
+    return pos;
+  }
+
+  function spawnLetter() {
+    const letter = document.createElement("div");
+    letter.className = "letter";
+    letter.textContent = getNextLetter();
+    letter.style.left = getNextPosition() + "px";
+    letter.style.top = "0px";
+
+    gameArea.appendChild(letter);
+    letters.push(letter);
+  }
+
+  function moveLetters() {
+    const remaining = [];
+
+    for (let i = 0; i < letters.length; i++) {
+      const letter = letters[i];
+      let currentTop = parseInt(letter.style.top);
+      currentTop += 2;
+      letter.style.top = currentTop + "px";
+
+      if (currentTop < 400) {
+        remaining.push(letter);
+      } else {
+        gameArea.removeChild(letter);
+        score = Math.max(0, score - 1);
+        updateScore();
+      }
+    }
+
+    letters = remaining;
+  }
+
+  function updateScore() {
+    scoreDisplay.textContent = "Score: " + score;
+  }
+
+  function startGame() {
+    mysound.play();
+    score = 0;
+    updateScore();
+
+    for (let i = 0; i < letters.length; i++) {
+      gameArea.removeChild(letters[i]);
+    }
+    letters = [];
+
+    clearInterval(spawnTimer);
+    clearInterval(fallTimer);
+
+    spawnTimer = setInterval(spawnLetter, 1000);
+    fallTimer = setInterval(moveLetters, 20);
+
+    setTimeout(() => {
+      clearInterval(spawnTimer);
+      clearInterval(fallTimer);
+       mysound.pause();
+      alert("Game Over! Your score is: " + score);
+     
+        }, 30000);
+  }
+
+  document.addEventListener("keydown", (event) => {
+    const keyPressed = event.key.toUpperCase();
+    const stillFalling = [];
+    let found = false;
+
+    for (let i = 0; i < letters.length; i++) {
+      if (!found && letters[i].textContent === keyPressed) {
+        gameArea.removeChild(letters[i]);
+        score++;
+        updateScore();
+        found = true;
+      } else {
+        stillFalling.push(letters[i]);
+      }
+    }
+
+    letters = stillFalling;
+  });
+</script>
+
+</body>
+</html>

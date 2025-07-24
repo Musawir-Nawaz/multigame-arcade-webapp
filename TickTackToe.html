@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <style>
+        /* Overall Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('background.webp'); /* Page background image */
+            background-size: 100% 100%; /* Stretch background to full screen */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main Title Styling */
+        h1 {
+            margin-top: 30px;
+            color: darkslateblue;
+            font-weight: bolder;
+            font-size: 40px;
+        }
+
+        /* Game Grid Styling */
+        #board {
+            display: grid;
+            grid-template-columns: 100px 100px 100px; /* 3 columns */
+            grid-gap: 5px;
+            justify-content: center;
+            margin: 30px auto;
+        }
+
+        /* Individual Cell Styling */
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            border: 2px solid #333;
+        }
+
+        /* Status Message Styling */
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* General Button Styling */
+        button {
+            margin-top: 20px;
+            padding: 8px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: cadetblue;
+        }
+
+        /* Start Game Button Styling */
+        #startBtn {
+            padding: 10px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 140px;
+            border-radius: 4px;
+            background-color: lawngreen;
+            border: darkviolet;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Game Heading -->
+    <h1>❌Tic Tac Toe⭕</h1>
+    
+    <!-- Start Game Button -->
+    <button id="startBtn">Start Game😈</button>
+
+    <!-- Main Game Area, hidden initially -->
+    <div id="gameArea" style="display:none;">
+        <div id="board"></div> <!-- Game Grid Area -->
+        <div id="status">Player X's Turn</div> <!-- Status Message Area -->
+        <button onclick="resetGame()">Restart</button> <!-- Restart Game Button -->
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="background" src="background.wav"></audio> <!-- Background Music -->
+    <audio id="xSound" src="click.mp3.wav"></audio> <!-- Sound for Player X -->
+    <audio id="oSound" src="click1.wav"></audio> <!-- Sound for Player O -->
+    <audio id="winSound" src="win.mp3.wav"></audio> <!-- Win Sound -->
+    <audio id="drawSound" src="draw.wav"></audio> <!-- Draw Sound -->
+
+    <script>
+        // Get all required HTML elements
+        const board = document.getElementById('board');
+        const status = document.getElementById('status');
+        const xSound = document.getElementById('xSound');
+        const oSound = document.getElementById('oSound');
+        const winSound = document.getElementById('winSound');
+        const drawSound = document.getElementById('drawSound');
+        const background = document.getElementById('background');
+        const startBtn = document.getElementById('startBtn');
+        const gameArea = document.getElementById('gameArea');
+
+        // Game State Variables
+        let cells = [];               // Array to store all cells
+        let currentPlayer = 'X';      // Track current player (X or O)
+        let gameActive = true;        // Game status flag
+        let firstMoveMade = false;    // Track if first move is made (for stopping music)
+
+        // Start Game Button Click Event
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';  // Hide Start Button
+            gameArea.style.display = 'block'; // Show Game Area
+            background.play();                // Play Background Music
+            background.loop = true;           // Loop Music
+            createBoard();                    // Create Game Board
+        });
+
+        // Function to Create the 3x3 Game Grid
+        function createBoard() {
+            board.innerHTML = '';  // Clear board contents
+            cells = [];            // Reset cells array
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');   // Add cell styling
+                cell.addEventListener('click', () => handleMove(cell, i)); // Cell click event
+                board.appendChild(cell);      // Add cell to board
+                cells.push(cell);             // Store cell reference
+            }
+            firstMoveMade = false;  // Reset first move flag
+        }
+
+        // Function to Handle Player's Move
+        function handleMove(cell, index) {
+            if (cell.textContent || !gameActive) return; // Ignore if cell filled or game over
+
+            // Stop background music on first move
+            if (!firstMoveMade) {
+                background.pause();
+                background.currentTime = 0;
+                firstMoveMade = true;
+            }
+
+            // Place symbol for current player
+            if (currentPlayer === 'X') {
+                cell.textContent = '❌';
+            } else {
+                cell.textContent = '⭕';
+            }
+
+            // Play respective sound
+            if (currentPlayer === 'X') {
+                xSound.play();
+            }
+            if (currentPlayer === 'O') {
+                oSound.play();
+            }
+
+            // Check for win condition
+            if (checkWin()) {
+                status.textContent = 'Player ' + currentPlayer + ' Wins!';
+                gameActive = false;
+                winSound.play();
+            } 
+            // Check for draw condition
+            else if (isDraw()) {
+                status.textContent = "It's a Draw!";
+                gameActive = false;
+                drawSound.play();
+            } 
+            // Switch turns if game continues
+            else {
+                if (currentPlayer === 'X') {
+                    currentPlayer = 'O';
+                } else {
+                    currentPlayer = 'X';
+                }
+                status.textContent = 'Player ' + currentPlayer + "'s Turn";
+            }
+        }
+
+        // Function to Check for a Winning Combination (Without .some)
+        function checkWin() {
+            const winCombos = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]             // Diagonals
+            ];
+
+            // Check each combination manually
+            for (let i = 0; i < winCombos.length; i++) {
+                const [a, b, c] = winCombos[i];
+                if (
+                    cells[a].textContent && 
+                    cells[a].textContent === cells[b].textContent && 
+                    cells[a].textContent === cells[c].textContent
+                ) {
+                    return true;  // Win found
+                }
+            }
+            return false;  // No win
+        }
+
+        // Function to Check for a Draw (Without .every)
+        function isDraw() {
+            for (let i = 0; i < cells.length; i++) {
+                if (cells[i].textContent === '') {
+                    return false; // Empty cell found, not draw
+                }
+            }
+            return true; // All cells filled, draw
+        }
+
+        // Function to Restart the Game
+        function resetGame() {
+            currentPlayer = 'X';                        // Reset to player X
+            gameActive = true;                         // Enable game
+            status.textContent = 'Player X\'s Turn';   // Reset status message
+            createBoard();                             // Rebuild game board
+        }
+    </script>
+
+</body>
+</html>

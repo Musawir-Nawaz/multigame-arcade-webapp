@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory Game</title>
+  <style>
+    /* Make sure body fills the screen and has no scrollbars */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Set background image and styling */
+    body {
+      background-image: url('gamebk.gif');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* Style the game board container */
+    .parent {
+      display: flex;
+      background-color: rgba(240, 248, 255, 0.431); /* translucent background */
+      border-radius: 0 150px 0 150px;
+      row-gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px 200px 200px 200px;
+      padding: 50px;
+    }
+
+    /* Style each card (div) inside the game board */
+    .parent > div {
+      background-color: #f1f1f1af;
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 20px;
+      font-size: 90px;
+      width: 90px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Game Board: 20 cards, each with an emoji assigned -->
+  <div class="parent">
+    <div class="child" onclick="flip(this, '🍎')">?</div>
+    <div class="child" onclick="flip(this, '🍌')">?</div>
+    <div class="child" onclick="flip(this, '🍇')">?</div>
+    <div class="child" onclick="flip(this, '🍉')">?</div>
+    <div class="child" onclick="flip(this, '🍓')">?</div>
+    <div class="child" onclick="flip(this, '🍍')">?</div>
+    <div class="child" onclick="flip(this, '🥝')">?</div>
+    <div class="child" onclick="flip(this, '🍑')">?</div>
+    <div class="child" onclick="flip(this, '🍐')">?</div>
+    <div class="child" onclick="flip(this, '🍎')">?</div>
+    <div class="child" onclick="flip(this, '🍌')">?</div>
+    <div class="child" onclick="flip(this, '🍇')">?</div>
+    <div class="child" onclick="flip(this, '🍉')">?</div>
+    <div class="child" onclick="flip(this, '🍓')">?</div>
+    <div class="child" onclick="flip(this, '🍍')">?</div>
+    <div class="child" onclick="flip(this, '🍒')">?</div>
+    <div class="child" onclick="flip(this, '🥝')">?</div>
+    <div class="child" onclick="flip(this, '🍑')">?</div>
+    <div class="child" onclick="flip(this, '🍐')">?</div>
+    <div class="child" onclick="flip(this, '🍒')">?</div>
+  </div>
+
+  <!-- Background music (looped), hidden by default -->
+  <audio id="mySound" src="memorySound.mp3" hidden loop autoplay></audio>
+
+  <!-- Result display (currently unused) -->
+  <p id="result"></p>
+
+  <script>
+    // Game state variables
+    let first = null;      // First flipped card
+    let second = null;     // Second flipped card
+    let lock = false;      // Prevents clicking during card comparison
+    let matches = 0;       // Number of matched pairs
+
+    // Flip function: handles revealing emoji and checking match
+    function flip(btn, emoji) {
+      // If locked or card already revealed, exit
+      if (lock || btn.innerText !== "?") return;
+
+      // Show the emoji
+      btn.innerText = emoji;
+
+      // If first card, store it
+      if (!first) {
+        first = btn;
+      } else {
+        // If second card, store it and compare after delay
+        second = btn;
+        lock = true;
+
+        setTimeout(() => {
+          if (first.innerText === second.innerText) {
+            // If matched, keep them revealed and count match
+            matches++;
+            if (matches === 10) {
+              alert("🎉 Congratulations!"); // Game won
+            }
+          } else {
+            // If not matched, hide emojis again
+            first.innerText = "?";
+            second.innerText = "?";
+          }
+ 
+          // Reset for next turn
+          first = null;
+          second = null;
+          lock = false;
+        }, 800); // Delay for visual feedback
+      }
+    }
+
+    // Play background music only once on first user interaction
+    function playMusicOnce() {
+      const audio = document.getElementById("mySound");
+      if (audio.paused) {
+        audio.play();
+      }
+      window.removeEventListener("click", playMusicOnce); // Remove listener after first use
+    }
+
+    // Attach listener to play music after any click
+    window.addEventListener("click", playMusicOnce);
+  </script>
+
+</body>
+</html>

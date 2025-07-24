@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <style>
+        /* Basic Body Styling with background image */
+        body {
+            font-family: Arial, sans-serif;
+            background: url(background.webp); /* Background image file */
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for the game board */
+        .game-board {
+            background: whitesmoke;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Main Title Styling */
+        h1 {
+            color: darkblue;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        /* Button Choices Area Styling */
+        .choices {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Responsive wrap for smaller screens */
+        }
+
+        /* Button Styling */
+        button {
+            padding: 15px 25px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: lightseagreen;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover Effect on Buttons */
+        button:hover {
+            background-color:darkblue;
+        }
+
+        /* Result Display Styling */
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+            color: darkslategray;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Game Board Container -->
+    <div class="game-board">
+        <h1>Rock Paper Scissors</h1>
+
+        <!-- Player Choices with Button Click Events -->
+        <div class="choices">
+            <button onclick="play('Stone')">🪨 Rock</button>
+            <button onclick="play('Paper')">📄 Paper</button>
+            <button onclick="play('Scissors')">✂️ Scissors</button>
+        </div>
+
+        <!-- Area to Show Result -->
+        <div id="result"></div>
+    </div>
+
+    <!-- Audio Elements for Sound Effects -->
+    <audio id="winSound" src="win.mp3"></audio>
+    <audio id="loseSound" src="lose.wav"></audio>
+    <audio id="drawSound" src="draw.wav"></audio>
+
+    <script>
+        // Get references to audio elements
+        const winSound = document.getElementById('winSound');
+        const loseSound = document.getElementById('loseSound');
+        const drawSound = document.getElementById('drawSound');
+
+        // Main function called when player clicks a choice
+        function play(playerChoice) {
+            const choices = ['Stone', 'Paper', 'Scissors']; // Possible choices
+            const computerChoice = choices[Math.floor(Math.random() * 3)]; // Random computer choice
+
+            let result = '';
+
+            // Check for draw
+            if (playerChoice === computerChoice) {
+                result = `🤝 It's a Draw! You both chose ${playerChoice}.`;
+                drawSound.play();
+            }
+            // Check for player win conditions
+            else if (
+                (playerChoice === 'Stone' && computerChoice === 'Scissors') ||
+                (playerChoice === 'Paper' && computerChoice === 'Stone') ||
+                (playerChoice === 'Scissors' && computerChoice === 'Paper')
+            ) {
+                result = `🎉 You Win! You chose ${playerChoice} & Computer chose ${computerChoice}.`;
+                winSound.play();
+            }
+            // Else, player loses
+            else {
+                result = `💀 You Lose! You chose ${playerChoice} & Computer chose ${computerChoice}.`;
+                loseSound.play();
+            }
+
+            // Display the result message
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+
+</body>
+</html>
